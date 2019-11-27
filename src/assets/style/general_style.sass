@@ -1,0 +1,529 @@
+// General styles
+*
+  cursor: none
+  user-select: none
+  margin: 0
+  color: $textColor
+  line-height: 1.5
+  
+*::-webkit-scrollbar
+  display: none
+
+*
+  scrollbar-width: none
+
+.smoothScroll
+  scroll-behavior: smooth
+
+#app 
+  font-family: 'Avenir', Helvetica, Arial, sans-serif
+  -webkit-font-smoothing: antialiased
+  -moz-osx-font-smoothing: grayscale
+  #nav
+    position: fixed
+    z-index: $navAndArrDownIndex
+    background: $backgroundColor
+    width: 100vw
+    height: 100px
+    padding: 0 10vw
+    box-sizing: border-box
+    display: flex
+    justify-content: space-between
+    align-items: center
+    transition: all 1s ease
+    @media (max-width: $tabletWidth)
+      height: 75px
+    #logo
+      height: 60%
+      width: auto
+      @media (max-width: $tabletWidth)
+        position: absolute
+        left: 15px
+        top: 16px
+    .icon
+      @media (min-width: $tabletWidth)
+        display: none
+      position: fixed
+      right: 20px
+      top: 39px
+      transform: translate(-50%, -50%)
+      width: 40px
+      height: 40px
+      z-index: 1200
+      .hamburger
+        width: 30px
+        height: 4px
+        background: $textColor
+        position: absolute
+        top: 50%
+        left: 50%
+        transform: translate(-50%, -50%)
+        transition: all .5s ease-in-out
+        border-radius: 30px
+        &:before,
+        &:after
+          border-radius: 30px
+          content: ''
+          position: absolute
+          width: 30px
+          height: 4px
+          background: $textColor
+          transform: translate(-50%)
+          transition: .5s
+        &:before
+          top: -10px
+          left: 15px
+        &:after
+          top: 10px
+          left: 15px
+    .active .hamburger
+      background: transparent
+      &:before
+        background: $menuMobileText
+        transform: rotate(45deg)
+        top: 0
+        left: 0
+      &:after
+        background: $menuMobileText
+        transform: rotate(135deg)
+        top: 0
+        left: 0
+    #menuMobile
+      position: absolute
+      left: 0
+      top: 0
+      opacity: .97
+      width: 100vw
+      height: 100vh
+      background: $textColor
+      display: flex
+      flex-direction: column
+      justify-content: center
+      @media (min-width: $tabletWidth)
+        display: none
+      .link
+        margin: 5px auto
+        @media (max-width: $smartphoneWidth) and (orientation: landscape)
+          margin: 2px auto
+        span
+          display: block
+          opacity: 0
+          font-size: 27px
+          color: $menuMobileText
+          @media (max-width: $tabletWidth) and (orientation: landscape)
+            font-size: 25px
+          animation: fade-up .5s .25s ease-in-out forwards
+      .btn
+        opacity: 0
+        animation: fade-up .5s .25s ease-in-out forwards
+      .socialMedia
+        opacity: 0
+        animation: fade-up .5s .25s ease-in-out forwards
+        display: flex
+        justify-content: center
+        margin-top: 20px
+        width: 100vw
+        height: 49px
+        bottom: 25px
+        @media (orientation: landscape)
+          position: absolute
+          flex-direction: column
+          width: 49px
+          height: 100vh
+          right: 20px
+          justify-content: flex-end
+        @media (min-width: $tabletWidth)
+          bottom: 30px
+        a
+          width: 35px
+          height: 35px
+          margin: 7px
+          display: block
+          img
+            width: 100%
+            height: 100%
+    #menu
+      display: flex
+      align-items: center
+      .link
+        padding: 30px
+        span
+          font-size: 13px
+        .linkUnderline
+          background: #573df3
+          transform-origin: left
+          transform: scaleX(0)
+          transition: transform .5s ease-in-out
+          position: relative
+          top: 1px
+          height: 2px
+          width: 100%
+        &:hover
+          .linkUnderline
+            transform: scaleX(1)
+      @media (max-width: $tabletWidth)
+        display: none
+  #routerView
+    overflow: hidden
+  #cursor
+    opacity: .5
+    width: 10px
+    height: 10px
+    pointer-events: none
+    background: $textColor
+    border-radius: 50%
+    position: fixed
+    z-index: $cursorIndex
+  .formContainer
+    position: fixed
+    left: 0
+    top: 0
+    width: 100vw
+    height: 100vh
+    z-index: $contactFormIndex
+    display: flex
+    .formCloseArea
+      width: calc(100vw - 600px)
+      @media (max-width: $tabletWidth)
+        width: 0
+      height: 100%
+    #contactForm
+      overflow: scroll
+      height: 100%
+      width: 600px
+      @media (max-width: $tabletWidth)
+        width: 100%
+      background-color: #fcfcfc
+      box-shadow: 0 0 50px rgba(18, 28, 37, .15)
+      box-sizing: border-box
+      #closeFormBtn
+        width: 40px
+        height: 40px
+        position: fixed
+        z-index: $contactFormIndex
+        right: 30px
+        top: 30px
+        transition: transform .5s ease-in-out
+        transform: scale(0.9)
+        border-radius: 50%
+        background-color: #573df3
+        img
+          width: 100%
+          height: 100%
+          margin: auto
+        &:hover
+          transform: scale(1)
+      hr
+        border-top: 2px solid #573df3
+      @media (max-width: $tabletWidth)
+        width: 100vw
+      .contactContent
+        margin: 100px 75px
+        box-sizing: border-box
+        position: relative
+        @media (min-width: $tabletWidth) and (max-height: 850px)
+          margin: 50px 75px
+        @media (max-width: $tabletWidth)
+          margin: 10vw
+        h1
+          @media (max-width: $tabletWidth)
+            font-size: 22px
+            margin-top: 75px
+        small
+          display: block
+          margin: 5px 0 50px 0
+          font-weight: bold
+          font-size: 14px
+          @media (max-width: $tabletWidth)
+            margin: 5px 0 0 0
+            font-size: 13px
+        .inputContent
+          position: relative
+          height: 320px
+          transition: all .5s ease-in-out
+          .submitMsg
+            position: absolute
+            text-align: center
+            left: 0
+            right: 0
+            top: 150px
+            bottom: 0
+            margin: auto
+            font-size: 24px
+            @media (max-width: $tabletWidth)
+              font-size: 20px
+          .step3
+            input
+              margin-bottom: 20px
+          .step1
+            bottom: 20px
+          div
+            position: absolute
+            width: 100%
+            label
+              font-size: 15px
+              font-weight: bold
+              display: block
+              margin: 40px 0 15px 0
+              @media (max-width: $tabletWidth)
+                font-size: 13px
+            input[type="text"], textarea
+              background: #f9f9f9
+              width: 100%
+              padding: 10px
+              box-sizing: border-box
+              border: 1px solid #573df3
+              @media (max-width: $tabletWidth)
+                outline: none
+            .radiosContainer
+              display: flex
+              align-items: center
+              .radioSingle
+                .specialSpan
+                  display: block
+                  width: 100px
+              @media (max-width: $tabletWidth)
+                flex-wrap: wrap
+              .radioSingle 
+                display: block 
+                position: relative 
+                font-size: 14px
+                width: 80px
+                padding-left: 28px
+                margin-top: 0
+                .checkmark
+                  transition: all .5s ease
+                input 
+                  position: absolute 
+                  opacity: 0 
+                  height: 0 
+                  width: 0
+                  &:checked 
+                    & ~ .checkmark 
+                      background-color: #573df3 !important
+                      &:after 
+                        display: block 
+                &:hover 
+                  input 
+                    & ~ .checkmark 
+                      background-color: #ccc 
+                .checkmark 
+                  &:after 
+                    top: 0 
+                    left: 0
+                    right: 0
+                    bottom: 0
+                    margin: auto 
+                    width: 8px 
+                    height: 8px 
+                    border-radius: 50% 
+                    background: white 
+              .checkmark 
+                position: absolute 
+                top: 0 
+                left: 0 
+                height: 20px 
+                width: 20px 
+                background-color: #e0e0e0 
+                border-radius: 50% 
+                &:after 
+                  content: "" 
+                  position: absolute 
+                  display: none 
+        .stepsWidget
+          margin-top: 20px
+          display: flex
+          justify-content: center
+          position: relative
+          .step
+            width: 15px
+            height: 15px
+            margin: 5px
+            border-radius: 50%
+            display: flex
+            transition: all 1s ease-in-out
+            span
+              text-align: center
+        .formButtons
+          display: flex
+          justify-content: flex-end
+          @media (max-width: $tabletWidth) and (orientation: portrait)
+            margin-bottom: 100px
+          .contactBtn
+            margin-left: 0px
+            margin-right: 0px
+  #loader
+    position: fixed
+    left: 0
+    top: 0
+    background-color: $backgroundColor
+    width: 150vw
+    height: 100vh
+    z-index: $loaderIndex
+    animation: loader-anim 3s ease-in-out
+    box-shadow: 0 0 50px rgba(18, 28, 37, .25)
+    @media (max-width: $smartphoneWidth)
+      box-shadow: 0 0 20px rgba(18, 28, 37, .1)
+    .coloredPart
+      width: 30vw
+      height: 100%
+      margin-left: auto
+      background-color: #573df3
+      animation: loader-anim 3s ease-in-out
+  .welcomeScreen
+    position: fixed
+    background-color: $backgroundColor
+    left: 0
+    top: 0
+    width: 100vw
+    height: 100vh
+    z-index: $welcomeScreenIndex
+    display: flex
+    flex-direction: column
+    justify-content: center
+    align-items: center
+    box-shadow: 0 0 50px rgba(18, 28, 37, .4)
+    h1
+      text-align: center
+      font-size: 100px
+      @media (min-width: $tabletWidth) and (max-width: $smallLaptopWidth)
+        font-size: 80px
+      @media (max-width: $tabletWidth)
+        margin: 0 10vw
+        font-size: 70px
+      @media (max-width: $smartphoneWidth)
+        font-size: 30px
+
+.container
+  .section
+    width: 100vw
+    overflow: hidden
+    box-sizing: border-box
+    background: $backgroundColor
+    position: relative
+    &:nth-child(1)
+      z-index: 5
+    &:nth-child(2)
+      z-index: 4
+    &:nth-child(3)
+      z-index: 3
+    &:nth-child(4)
+      z-index: 2
+    &:nth-child(5)
+      z-index: 1
+    .section-wrapper
+      width: 100%
+      height: 100%
+//
+
+// Class based animations
+.scaleFade
+  opacity: 0
+  transform: scale(0.6) translate(500px, -250px)
+
+.fadeOut
+  opacity: 0
+  transform: translateY(60px)
+
+.fadeOutClass
+  transition: all .75s ease-in-out
+
+.hideText
+  transform: translateY(100%)
+
+.textContainer
+  overflow: hidden
+  *
+    transition: all .75s ease-in-out
+//
+
+// Animations
+.fade-enter-active
+  transition: all .9s .8s
+
+.fade-leave-active 
+  transition: all .7s
+
+.fade-enter, .fade-leave-to
+  transform: translate(0, 30px)
+  opacity: 0
+
+.menu-mobile-enter-active, .menu-mobile-leave-active
+  transition: all .5s ease-in-out
+
+.menu-mobile-enter, .menu-mobile-leave-to
+  opacity: 0 !important
+
+.welcome-enter-active, .welcome-leave-active
+  transition: all 1.5s ease-in-out
+
+.welcome-enter, .welcome-leave-to
+  transform: translateY(-110vh)
+
+.contactFormAnim-enter-active
+  transition: all .9s .9s
+
+.contactFormAnim-leave-active 
+  transition: all .9s
+
+.contactFormAnim-enter
+  opacity: 0
+  transform: translateX(-100px)
+
+.contactFormAnim-leave-to
+  opacity: 0
+  transform: translateY(-100px)
+
+.contactContainer-enter-active, 
+.contactContainer-leave-active
+  transition: all 1s ease-in-out
+
+.contactContainer-enter, .contactContainer-leave-to
+  transform: translateX(600px)
+  @media (max-width: $tabletWidth)
+    transform: translateX(100vw)
+
+.showLoaderAnim-enter
+  transform: translateX(-150vw) !important
+  .coloredPart
+    transform: scaleX(1) !important
+
+@keyframes loader-anim
+  0%
+    transform: translateX(-150vw)
+  50%
+    transform: translateX(0)
+  100%
+    transform: translateX(-150vw)
+
+@keyframes fade-up
+  from
+    transform: translateY(40px)
+    opacity: 0
+  to
+    transform: translateY(0)
+    opacity: 1
+
+@keyframes float-y 
+  0%
+    transform: translateY(35px)
+  50%
+    transform: translateY(0)
+  100%
+    transform: translateY(35px)
+
+@keyframes fade-in
+  0%
+    transform: scale(0)
+  100%
+    transform: scale(1)
+  
+@keyframes landing-page-shape-animation
+  0%
+    transform: scaleX(1)
+  50%
+    transform: scaleX(0)
+  100%
+    transform: scaleX(1)
+//
+  
